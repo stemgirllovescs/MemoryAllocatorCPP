@@ -6,8 +6,6 @@
 
 * GitLab ID: (your GitLab ID)
 
-* HackerRank ID: (your HackerRank ID)
-
 * Git SHA: (most recent Git SHA, final change to your repo will change this, that's ok)
 
 * GitLab Pipelines: (link to your GitLab CI Pipeline)
