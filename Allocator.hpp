@@ -86,17 +86,17 @@ class My_Allocator {
                 // -----------
 
                 iterator (My_Allocator& r, size_type i) :
-                		_r (r),
-                		_i (i)
-                	{}
+                        _r (r),
+                        _i (i)
+                    {}
 
                 // ----------
                 // operator *
                 // ----------
 
-				/**
-				 * beginning sentinel of the block
-				 */
+                /**
+                 * beginning sentinel of the block
+                 */
                 int& operator * () const { // fix!
                     // <your code>
                     static int tmp = 0;
@@ -171,15 +171,15 @@ class My_Allocator {
                 // -----------
 
                 const_iterator (const My_Allocator& r, size_type i) :
-                		_r (r),
-                		_i (i)
-                	{}
+                        _r (r),
+                        _i (i)
+                    {}
 
                 // ----------
                 // operator *
                 // ----------
 
-				// beginning sentinel of the block
+                // beginning sentinel of the block
                 const int& operator * () const { // fix!
                     // <your code>
                     static int tmp = 0;
@@ -252,7 +252,7 @@ class My_Allocator {
          */
         My_Allocator () {
             if (N < (sizeof(T) + (2 * sizeof(int))))
-            	throw std::bad_alloc();
+                throw std::bad_alloc();
             (*this)[0]   = N-8;
             (*this)[N-4] = N-8;
             assert(valid());}
