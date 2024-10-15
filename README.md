@@ -1,10 +1,10 @@
 # CS371p: Object-Oriented Programming Allocator Repo
 
-* Name: (your Full Name)
+* Name: Cash Belknap, Katherine Liang
 
-* EID: (your EID)
+* EID: ctb2559, 
 
-* GitLab ID: (your GitLab ID)
+* GitLab ID: cashbelknap, katherineliang100
 
 * Git SHA: (most recent Git SHA, final change to your repo will change this, that's ok)
 
