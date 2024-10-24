@@ -12,6 +12,6 @@
 
 * Estimated completion time: 12
 
-* Actual completion time: (actual time in hours, int or float)
+* Actual completion time: 15
 
 * Comments: (any additional comments you have)

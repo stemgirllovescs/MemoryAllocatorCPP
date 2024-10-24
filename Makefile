@@ -126,9 +126,9 @@ ctd-generate:
 # execute the run harness against your test files in the Allocator test repo and diff with the expected output
 # change gpdowning to your GitLab-ID
 run: run_Allocator ../cs371p-allocator-tests
-	-$(CHECKTESTDATA) Allocator.ctd.txt ../cs371p-allocator-tests/gpdowning-Allocator.in.txt
-	./run_Allocator < ../cs371p-allocator-tests/gpdowning-Allocator.in.txt > Allocator.tmp.txt
-	diff Allocator.tmp.txt ../cs371p-allocator-tests/gpdowning-Allocator.out.txt
+	-$(CHECKTESTDATA) Allocator.ctd.txt ../cs371p-allocator-tests/cashbelknap-Allocator.in.txt
+	./run_Allocator < ../cs371p-allocator-tests/cashbelknap-Allocator.in.txt > Allocator.tmp.txt
+	diff Allocator.tmp.txt ../cs371p-allocator-tests/cashbelknap-Allocator.out.txt
 
 # execute the run harness against all of the test files in the Allocator test repo and diff with the expected output
 run-all: run_Allocator ../cs371p-allocator-tests

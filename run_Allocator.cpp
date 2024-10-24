@@ -54,6 +54,8 @@ int main() {
                 try {
                     auto ptr = allocator.allocate(request);
                     busy_blocks.push_back(ptr);
+                    // sort by pointer value
+                    std::sort(busy_blocks.begin(), busy_blocks.end());
                 } catch (const std::bad_alloc& e) {
                     std::cerr << "Allocation failed: " << e.what() << std::endl;
                     // Do not add to busy_blocks; indices remain consistent
