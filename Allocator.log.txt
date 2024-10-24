@@ -1,0 +1,59 @@
+commit aeaebce41fbca3ff879dfcf25cb372657c8f4d32
+Author: cashbelknap <cashbelknap@pm.me>
+Date:   Wed Oct 23 23:00:53 2024 -0500
+
+    tests working
+
+commit ca8b2d5c328b76e0a59f37412336950ec760f198
+Author: cashbelknap <cashbelknap@pm.me>
+Date:   Wed Oct 23 22:56:14 2024 -0500
+
+    added tests and fixed include in run
+
+commit 0182d655c6b36d5f160536e61eb89bceeadf58d2
+Author: cashbelknap <cashbelknap@pm.me>
+Date:   Wed Oct 23 22:48:10 2024 -0500
+
+    code works
+
+commit f22679271a73d7a49e513bd7bfdace6471fd6efc
+Author: cashbelknap <cashbelknap@pm.me>
+Date:   Wed Oct 23 22:00:08 2024 -0500
+
+    Kathy's progress
+
+commit 4fc7c11c715fb38d369d2ff00cc6f68ac44dc01d
+Author: Cash Belknap <belknapct0604@gmail.com>
+Date:   Tue Oct 15 17:58:10 2024 -0500
+
+    updated readme
+
+commit 8ad535fec5b25345dc923bcd23ff8e3f46e0d421
+Author: Glenn Downing <downing@cs.utexas.edu>
+Date:   Tue Oct 8 20:25:12 2024 -0500
+
+    another commit
+
+commit 037a6744d6ecf4df1d418075777d73926bf208ad
+Author: Glenn Downing <downing@cs.utexas.edu>
+Date:   Tue Oct 8 16:13:40 2024 -0500
+
+    another commit
+
+commit 59c7be871052be3135cf329633b7fbfb31a51163
+Author: Glenn Downing <downing@cs.utexas.edu>
+Date:   Tue Oct 8 14:58:23 2024 -0500
+
+    another commit
+
+commit 79d86f5bb9011a6dbfcac7e7d1608806a65d7639
+Author: Glenn Downing <downing@cs.utexas.edu>
+Date:   Tue Oct 8 12:16:52 2024 -0500
+
+    another commit
+
+commit 263c5639e1816b69f95894028e80ffc257e572f3
+Author: Glenn Downing <downing@cs.utexas.edu>
+Date:   Tue Oct 8 12:15:54 2024 -0500
+
+    first commit
