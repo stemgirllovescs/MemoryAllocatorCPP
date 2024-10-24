@@ -1,0 +1,13 @@
+# https://github.com/DOMjudge/checktestdata/blob/main/doc/format-spec.md
+
+# Thanks to Rob Mayoff
+
+INT(1, 100, t) NEWLINE
+REP(t)
+    NEWLINE
+
+    # Each request starts with a digit or hyphen.
+    WHILE(MATCH("-0123456789"))
+        INT(-125, 125) NEWLINE
+    END
+END

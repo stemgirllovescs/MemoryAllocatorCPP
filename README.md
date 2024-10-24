@@ -8,9 +8,9 @@
 
 * Git SHA: (most recent Git SHA, final change to your repo will change this, that's ok)
 
-* GitLab Pipelines: (link to your GitLab CI Pipeline)
+* GitLab Pipelines: [(link to your GitLab CI Pipeline)](https://gitlab.com/cashbelknap/cs371p-allocator/-/pipelines)
 
-* Estimated completion time: (estimated time in hours, int or float)
+* Estimated completion time: 12
 
 * Actual completion time: (actual time in hours, int or float)
 
