@@ -14,4 +14,4 @@
 
 * Actual completion time: 15
 
-* Comments: (any additional comments you have)
+* Comments: GhatGPT promt used: "debug my code and add comments please"
