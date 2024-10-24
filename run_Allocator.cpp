@@ -9,6 +9,7 @@
 #include <iostream> // cin, cout
 #include <vector>   // vector
 #include <sstream>
+#include <algorithm> // sort
 
 #include "Allocator.hpp"
 
