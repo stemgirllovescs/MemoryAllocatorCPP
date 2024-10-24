@@ -2,11 +2,11 @@
 
 * Name: Cash Belknap, Katherine Liang
 
-* EID: ctb2559, 
+* EID: ctb2559, xl5878
 
 * GitLab ID: cashbelknap, katherineliang100
 
-* Git SHA: (most recent Git SHA, final change to your repo will change this, that's ok)
+* Git SHA: 8afacadf4923237fec8450e6688150dea1394665
 
 * GitLab Pipelines: [(link to your GitLab CI Pipeline)](https://gitlab.com/cashbelknap/cs371p-allocator/-/pipelines)
 
