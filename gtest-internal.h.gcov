@@ -443,13 +443,13 @@
         -:  439:// of a Test object.
         -:  440:class TestFactoryBase {
         -:  441: public:
-       3*:  442:  virtual ~TestFactoryBase() {}
+      10*:  442:  virtual ~TestFactoryBase() {}
 ------------------
 _ZN7testing8internal15TestFactoryBaseD0Ev:
     #####:  442:  virtual ~TestFactoryBase() {}
 ------------------
 _ZN7testing8internal15TestFactoryBaseD2Ev:
-        3:  442:  virtual ~TestFactoryBase() {}
+       10:  442:  virtual ~TestFactoryBase() {}
 ------------------
         -:  443:
         -:  444:  // Creates a test instance to run. The instance is both created and destroyed
@@ -457,7 +457,7 @@ _ZN7testing8internal15TestFactoryBaseD2Ev:
         -:  446:  virtual Test* CreateTest() = 0;
         -:  447:
         -:  448: protected:
-        3:  449:  TestFactoryBase() {}
+       10:  449:  TestFactoryBase() {}
         -:  450:
         -:  451: private:
         -:  452:  GTEST_DISALLOW_COPY_AND_ASSIGN_(TestFactoryBase);
@@ -468,7 +468,7 @@ _ZN7testing8internal15TestFactoryBaseD2Ev:
         -:  457:template <class TestClass>
         -:  458:class TestFactoryImpl : public TestFactoryBase {
         -:  459: public:
-        3:  460:  Test* CreateTest() override { return new TestClass; }
+       10:  460:  Test* CreateTest() override { return new TestClass; }
 ------------------
 _ZN7testing8internal15TestFactoryImplI27AllocatorFixture_test0_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
@@ -477,6 +477,27 @@ _ZN7testing8internal15TestFactoryImplI27AllocatorFixture_test1_TestE10CreateTest
         1:  460:  Test* CreateTest() override { return new TestClass; }
 ------------------
 _ZN7testing8internal15TestFactoryImplI27AllocatorFixture_test2_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+------------------
+_ZN7testing8internal15TestFactoryImplI27AllocatorFixture_test3_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+------------------
+_ZN7testing8internal15TestFactoryImplI27AllocatorFixture_test4_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+------------------
+_ZN7testing8internal15TestFactoryImplI27AllocatorFixture_test5_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+------------------
+_ZN7testing8internal15TestFactoryImplI27AllocatorFixture_test6_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+------------------
+_ZN7testing8internal15TestFactoryImplI27AllocatorFixture_test7_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+------------------
+_ZN7testing8internal15TestFactoryImplI27AllocatorFixture_test8_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+------------------
+_ZN7testing8internal15TestFactoryImplI27AllocatorFixture_test9_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
 ------------------
         -:  461:};
@@ -499,8 +520,8 @@ _ZN7testing8internal15TestFactoryImplI27AllocatorFixture_test2_TestE10CreateTest
         -:  478:using TearDownTestSuiteFunc = void (*)();
         -:  479:
         -:  480:struct CodeLocation {
-        3:  481:  CodeLocation(const std::string& a_file, int a_line)
-        3:  482:      : file(a_file), line(a_line) {}
+       10:  481:  CodeLocation(const std::string& a_file, int a_line)
+       10:  482:      : file(a_file), line(a_line) {}
         -:  483:
         -:  484:  std::string file;
         -:  485:  int line;
@@ -512,9 +533,9 @@ _ZN7testing8internal15TestFactoryImplI27AllocatorFixture_test2_TestE10CreateTest
         -:  491:// Utility functions to help SuiteApiResolver
         -:  492:using SetUpTearDownSuiteFuncType = void (*)();
         -:  493:
-       12:  494:inline SetUpTearDownSuiteFuncType GetNotDefaultOrNull(
+       40:  494:inline SetUpTearDownSuiteFuncType GetNotDefaultOrNull(
         -:  495:    SetUpTearDownSuiteFuncType a, SetUpTearDownSuiteFuncType def) {
-      12*:  496:  return a == def ? nullptr : a;
+      40*:  496:  return a == def ? nullptr : a;
         -:  497:}
         -:  498:
         -:  499:template <typename T>
@@ -527,34 +548,34 @@ _ZN7testing8internal15TestFactoryImplI27AllocatorFixture_test2_TestE10CreateTest
         -:  506:  using Test =
         -:  507:      typename std::conditional<sizeof(T) != 0, ::testing::Test, void>::type;
         -:  508:
-        3:  509:  static SetUpTearDownSuiteFuncType GetSetUpCaseOrSuite(const char* filename,
+       10:  509:  static SetUpTearDownSuiteFuncType GetSetUpCaseOrSuite(const char* filename,
         -:  510:                                                        int line_num) {
         -:  511:    SetUpTearDownSuiteFuncType test_case_fp =
-        3:  512:        GetNotDefaultOrNull(&T::SetUpTestCase, &Test::SetUpTestCase);
+       10:  512:        GetNotDefaultOrNull(&T::SetUpTestCase, &Test::SetUpTestCase);
         -:  513:    SetUpTearDownSuiteFuncType test_suite_fp =
-        3:  514:        GetNotDefaultOrNull(&T::SetUpTestSuite, &Test::SetUpTestSuite);
+       10:  514:        GetNotDefaultOrNull(&T::SetUpTestSuite, &Test::SetUpTestSuite);
         -:  515:
-       3*:  516:    GTEST_CHECK_(!test_case_fp || !test_suite_fp)
+      10*:  516:    GTEST_CHECK_(!test_case_fp || !test_suite_fp)
         -:  517:        << "Test can not provide both SetUpTestSuite and SetUpTestCase, please "
         -:  518:           "make sure there is only one present at "
     #####:  519:        << filename << ":" << line_num;
         -:  520:
-       3*:  521:    return test_case_fp != nullptr ? test_case_fp : test_suite_fp;
+      10*:  521:    return test_case_fp != nullptr ? test_case_fp : test_suite_fp;
         -:  522:  }
         -:  523:
-        3:  524:  static SetUpTearDownSuiteFuncType GetTearDownCaseOrSuite(const char* filename,
+       10:  524:  static SetUpTearDownSuiteFuncType GetTearDownCaseOrSuite(const char* filename,
         -:  525:                                                           int line_num) {
         -:  526:    SetUpTearDownSuiteFuncType test_case_fp =
-        3:  527:        GetNotDefaultOrNull(&T::TearDownTestCase, &Test::TearDownTestCase);
+       10:  527:        GetNotDefaultOrNull(&T::TearDownTestCase, &Test::TearDownTestCase);
         -:  528:    SetUpTearDownSuiteFuncType test_suite_fp =
-        3:  529:        GetNotDefaultOrNull(&T::TearDownTestSuite, &Test::TearDownTestSuite);
+       10:  529:        GetNotDefaultOrNull(&T::TearDownTestSuite, &Test::TearDownTestSuite);
         -:  530:
-       3*:  531:    GTEST_CHECK_(!test_case_fp || !test_suite_fp)
+      10*:  531:    GTEST_CHECK_(!test_case_fp || !test_suite_fp)
         -:  532:        << "Test can not provide both TearDownTestSuite and TearDownTestCase,"
         -:  533:           " please make sure there is only one present at"
     #####:  534:        << filename << ":" << line_num;
         -:  535:
-       3*:  536:    return test_case_fp != nullptr ? test_case_fp : test_suite_fp;
+      10*:  536:    return test_case_fp != nullptr ? test_case_fp : test_suite_fp;
         -:  537:  }
         -:  538:};
         -:  539:

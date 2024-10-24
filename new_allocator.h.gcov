@@ -104,9 +104,9 @@
         -:  100:      // NB: __n is permitted to be 0.  The C++ standard says nothing
         -:  101:      // about what the return value is when __n == 0.
         -:  102:      _GLIBCXX_NODISCARD _Tp*
-      132:  103:      allocate(size_type __n, const void* = static_cast<const void*>(0))
+      216:  103:      allocate(size_type __n, const void* = static_cast<const void*>(0))
         -:  104:      {
-      132:  105:	if (__builtin_expect(__n > this->_M_max_size(), false))
+      216:  105:	if (__builtin_expect(__n > this->_M_max_size(), false))
         -:  106:	  {
         -:  107:	    // _GLIBCXX_RESOLVE_LIB_DEFECTS
         -:  108:	    // 3190. allocator::allocate sometimes returns too little storage
@@ -122,12 +122,12 @@
         -:  118:	    return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp), __al));
         -:  119:	  }
         -:  120:#endif
-      132:  121:	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
+      216:  121:	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
         -:  122:      }
         -:  123:
         -:  124:      // __p is not permitted to be a null pointer.
         -:  125:      void
-       11:  126:      deallocate(_Tp* __p, size_type __t __attribute__ ((__unused__)))
+       32:  126:      deallocate(_Tp* __p, size_type __t __attribute__ ((__unused__)))
         -:  127:      {
         -:  128:#if __cpp_aligned_new
         -:  129:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
@@ -140,7 +140,7 @@
         -:  136:	    return;
         -:  137:	  }
         -:  138:#endif
-       11:  139:	::operator delete(__p
+       32:  139:	::operator delete(__p
         -:  140:#if __cpp_sized_deallocation
         -:  141:			  , __t * sizeof(_Tp)
         -:  142:#endif
@@ -192,10 +192,10 @@
         -:  188:
         -:  189:    private:
         -:  190:      _GLIBCXX_CONSTEXPR size_type
-      132:  191:      _M_max_size() const _GLIBCXX_USE_NOEXCEPT
+      216:  191:      _M_max_size() const _GLIBCXX_USE_NOEXCEPT
         -:  192:      {
         -:  193:#if __PTRDIFF_MAX__ < __SIZE_MAX__
-      132:  194:	return std::size_t(__PTRDIFF_MAX__) / sizeof(_Tp);
+      216:  194:	return std::size_t(__PTRDIFF_MAX__) / sizeof(_Tp);
         -:  195:#else
         -:  196:	return std::size_t(-1) / sizeof(_Tp);
         -:  197:#endif

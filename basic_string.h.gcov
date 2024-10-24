@@ -157,11 +157,11 @@
         -:  153:	_Alloc_hider(pointer __dat, const _Alloc& __a = _Alloc())
         -:  154:	: allocator_type(__a), _M_p(__dat) { }
         -:  155:#else
-        3:  156:	_Alloc_hider(pointer __dat, const _Alloc& __a)
-        3:  157:	: allocator_type(__a), _M_p(__dat) { }
+       10:  156:	_Alloc_hider(pointer __dat, const _Alloc& __a)
+       10:  157:	: allocator_type(__a), _M_p(__dat) { }
         -:  158:
-        4:  159:	_Alloc_hider(pointer __dat, _Alloc&& __a = _Alloc())
-        4:  160:	: allocator_type(std::move(__a)), _M_p(__dat) { }
+       11:  159:	_Alloc_hider(pointer __dat, _Alloc&& __a = _Alloc())
+       11:  160:	: allocator_type(std::move(__a)), _M_p(__dat) { }
         -:  161:#endif
         -:  162:
         -:  163:	pointer _M_p; // The actual data.
@@ -179,93 +179,93 @@
         -:  175:      };
         -:  176:
         -:  177:      void
-       46:  178:      _M_data(pointer __p)
-       46:  179:      { _M_dataplus._M_p = __p; }
+       81:  178:      _M_data(pointer __p)
+       81:  179:      { _M_dataplus._M_p = __p; }
         -:  180:
         -:  181:      void
-       62:  182:      _M_length(size_type __length)
-       62:  183:      { _M_string_length = __length; }
+      129:  182:      _M_length(size_type __length)
+      129:  183:      { _M_string_length = __length; }
         -:  184:
         -:  185:      pointer
-      251:  186:      _M_data() const
-      251:  187:      { return _M_dataplus._M_p; }
+      473:  186:      _M_data() const
+      473:  187:      { return _M_dataplus._M_p; }
         -:  188:
         -:  189:      pointer
-        7:  190:      _M_local_data()
+       21:  190:      _M_local_data()
         -:  191:      {
         -:  192:#if __cplusplus >= 201103L
-        7:  193:	return std::pointer_traits<pointer>::pointer_to(*_M_local_buf);
+       21:  193:	return std::pointer_traits<pointer>::pointer_to(*_M_local_buf);
         -:  194:#else
         -:  195:	return pointer(_M_local_buf);
         -:  196:#endif
         -:  197:      }
         -:  198:
         -:  199:      const_pointer
-      103:  200:      _M_local_data() const
+      155:  200:      _M_local_data() const
         -:  201:      {
         -:  202:#if __cplusplus >= 201103L
-      103:  203:	return std::pointer_traits<const_pointer>::pointer_to(*_M_local_buf);
+      155:  203:	return std::pointer_traits<const_pointer>::pointer_to(*_M_local_buf);
         -:  204:#else
         -:  205:	return const_pointer(_M_local_buf);
         -:  206:#endif
         -:  207:      }
         -:  208:
         -:  209:      void
-       46:  210:      _M_capacity(size_type __capacity)
-       46:  211:      { _M_allocated_capacity = __capacity; }
+       81:  210:      _M_capacity(size_type __capacity)
+       81:  211:      { _M_allocated_capacity = __capacity; }
         -:  212:
         -:  213:      void
-       62:  214:      _M_set_length(size_type __n)
+      129:  214:      _M_set_length(size_type __n)
         -:  215:      {
-       62:  216:	_M_length(__n);
-       62:  217:	traits_type::assign(_M_data()[__n], _CharT());
-       62:  218:      }
+      129:  216:	_M_length(__n);
+      129:  217:	traits_type::assign(_M_data()[__n], _CharT());
+      129:  218:      }
         -:  219:
         -:  220:      bool
-      103:  221:      _M_is_local() const
-      103:  222:      { return _M_data() == _M_local_data(); }
+      155:  221:      _M_is_local() const
+      155:  222:      { return _M_data() == _M_local_data(); }
         -:  223:
         -:  224:      // Create & Destroy
         -:  225:      pointer
         -:  226:      _M_create(size_type&, size_type);
         -:  227:
         -:  228:      void
-       45:  229:      _M_dispose()
+       66:  229:      _M_dispose()
         -:  230:      {
-       45:  231:	if (!_M_is_local())
-       11:  232:	  _M_destroy(_M_allocated_capacity);
-       45:  233:      }
+       66:  231:	if (!_M_is_local())
+       32:  232:	  _M_destroy(_M_allocated_capacity);
+       66:  233:      }
         -:  234:
         -:  235:      void
-       11:  236:      _M_destroy(size_type __size) throw()
-       11:  237:      { _Alloc_traits::deallocate(_M_get_allocator(), _M_data(), __size + 1); }
+       32:  236:      _M_destroy(size_type __size) throw()
+       32:  237:      { _Alloc_traits::deallocate(_M_get_allocator(), _M_data(), __size + 1); }
         -:  238:
         -:  239:      // _M_construct_aux is used to implement the 21.3.1 para 15 which
         -:  240:      // requires special behaviour if _InIterator is an integral type
         -:  241:      template<typename _InIterator>
         -:  242:        void
-        6:  243:        _M_construct_aux(_InIterator __beg, _InIterator __end,
+       20:  243:        _M_construct_aux(_InIterator __beg, _InIterator __end,
         -:  244:			 std::__false_type)
         -:  245:	{
         -:  246:          typedef typename iterator_traits<_InIterator>::iterator_category _Tag;
-        6:  247:          _M_construct(__beg, __end, _Tag());
-        6:  248:	}
+       20:  247:          _M_construct(__beg, __end, _Tag());
+       20:  248:	}
 ------------------
 _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE16_M_construct_auxIPcEEvT_S7_St12__false_type:
-        3:  243:        _M_construct_aux(_InIterator __beg, _InIterator __end,
+       10:  243:        _M_construct_aux(_InIterator __beg, _InIterator __end,
         -:  244:			 std::__false_type)
         -:  245:	{
         -:  246:          typedef typename iterator_traits<_InIterator>::iterator_category _Tag;
-        3:  247:          _M_construct(__beg, __end, _Tag());
-        3:  248:	}
+       10:  247:          _M_construct(__beg, __end, _Tag());
+       10:  248:	}
 ------------------
 _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE16_M_construct_auxIPKcEEvT_S8_St12__false_type:
-        3:  243:        _M_construct_aux(_InIterator __beg, _InIterator __end,
+       10:  243:        _M_construct_aux(_InIterator __beg, _InIterator __end,
         -:  244:			 std::__false_type)
         -:  245:	{
         -:  246:          typedef typename iterator_traits<_InIterator>::iterator_category _Tag;
-        3:  247:          _M_construct(__beg, __end, _Tag());
-        3:  248:	}
+       10:  247:          _M_construct(__beg, __end, _Tag());
+       10:  248:	}
 ------------------
         -:  249:
         -:  250:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
@@ -281,25 +281,25 @@ _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE16_M_construct_auxIPKcEEvT_
         -:  260:
         -:  261:      template<typename _InIterator>
         -:  262:        void
-        6:  263:        _M_construct(_InIterator __beg, _InIterator __end)
+       20:  263:        _M_construct(_InIterator __beg, _InIterator __end)
         -:  264:	{
         -:  265:	  typedef typename std::__is_integer<_InIterator>::__type _Integral;
-        6:  266:	  _M_construct_aux(__beg, __end, _Integral());
-        6:  267:        }
+       20:  266:	  _M_construct_aux(__beg, __end, _Integral());
+       20:  267:        }
 ------------------
 _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPcEEvT_S7_:
-        3:  263:        _M_construct(_InIterator __beg, _InIterator __end)
+       10:  263:        _M_construct(_InIterator __beg, _InIterator __end)
         -:  264:	{
         -:  265:	  typedef typename std::__is_integer<_InIterator>::__type _Integral;
-        3:  266:	  _M_construct_aux(__beg, __end, _Integral());
-        3:  267:        }
+       10:  266:	  _M_construct_aux(__beg, __end, _Integral());
+       10:  267:        }
 ------------------
 _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_:
-        3:  263:        _M_construct(_InIterator __beg, _InIterator __end)
+       10:  263:        _M_construct(_InIterator __beg, _InIterator __end)
         -:  264:	{
         -:  265:	  typedef typename std::__is_integer<_InIterator>::__type _Integral;
-        3:  266:	  _M_construct_aux(__beg, __end, _Integral());
-        3:  267:        }
+       10:  266:	  _M_construct_aux(__beg, __end, _Integral());
+       10:  267:        }
 ------------------
         -:  268:
         -:  269:      // For Input Iterators, used in istreambuf_iterators, etc.
@@ -319,12 +319,12 @@ _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_:
         -:  283:      _M_construct(size_type __req, _CharT __c);
         -:  284:
         -:  285:      allocator_type&
-      143:  286:      _M_get_allocator()
-      143:  287:      { return _M_dataplus; }
+      248:  286:      _M_get_allocator()
+      248:  287:      { return _M_dataplus; }
         -:  288:
         -:  289:      const allocator_type&
-      184:  290:      _M_get_allocator() const
-      184:  291:      { return _M_dataplus; }
+      292:  290:      _M_get_allocator() const
+      292:  291:      { return _M_dataplus; }
         -:  292:
         -:  293:    private:
         -:  294:
@@ -353,11 +353,11 @@ _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_:
         -:  317:      }
         -:  318:
         -:  319:      void
-        8:  320:      _M_check_length(size_type __n1, size_type __n2, const char* __s) const
+       18:  320:      _M_check_length(size_type __n1, size_type __n2, const char* __s) const
         -:  321:      {
-        8:  322:	if (this->max_size() - (this->size() - __n1) < __n2)
+       18:  322:	if (this->max_size() - (this->size() - __n1) < __n2)
     #####:  323:	  __throw_length_error(__N(__s));
-        8:  324:      }
+       18:  324:      }
         -:  325:
         -:  326:
         -:  327:      // NB: _M_limit doesn't check for a bad __pos value.
@@ -379,13 +379,13 @@ _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_:
         -:  343:      // When __n = 1 way faster than the general multichar
         -:  344:      // traits_type::copy/move/assign.
         -:  345:      static void
-       91:  346:      _S_copy(_CharT* __d, const _CharT* __s, size_type __n)
+      164:  346:      _S_copy(_CharT* __d, const _CharT* __s, size_type __n)
         -:  347:      {
-       91:  348:	if (__n == 1)
-       11:  349:	  traits_type::assign(*__d, *__s);
+      164:  348:	if (__n == 1)
+       18:  349:	  traits_type::assign(*__d, *__s);
         -:  350:	else
-       80:  351:	  traits_type::copy(__d, __s, __n);
-       91:  352:      }
+      146:  351:	  traits_type::copy(__d, __s, __n);
+      164:  352:      }
         -:  353:
         -:  354:      static void
         -:  355:      _S_move(_CharT* __d, const _CharT* __s, size_type __n)
@@ -425,25 +425,25 @@ _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_:
         -:  389:      { _S_copy_chars(__p, __k1.base(), __k2.base()); }
         -:  390:
         -:  391:      static void
-        3:  392:      _S_copy_chars(_CharT* __p, _CharT* __k1, _CharT* __k2) _GLIBCXX_NOEXCEPT
-        3:  393:      { _S_copy(__p, __k1, __k2 - __k1); }
+       10:  392:      _S_copy_chars(_CharT* __p, _CharT* __k1, _CharT* __k2) _GLIBCXX_NOEXCEPT
+       10:  393:      { _S_copy(__p, __k1, __k2 - __k1); }
         -:  394:
         -:  395:      static void
-       30:  396:      _S_copy_chars(_CharT* __p, const _CharT* __k1, const _CharT* __k2)
+       65:  396:      _S_copy_chars(_CharT* __p, const _CharT* __k1, const _CharT* __k2)
         -:  397:      _GLIBCXX_NOEXCEPT
-       30:  398:      { _S_copy(__p, __k1, __k2 - __k1); }
+       65:  398:      { _S_copy(__p, __k1, __k2 - __k1); }
         -:  399:
         -:  400:      static int
-        8:  401:      _S_compare(size_type __n1, size_type __n2) _GLIBCXX_NOEXCEPT
+       10:  401:      _S_compare(size_type __n1, size_type __n2) _GLIBCXX_NOEXCEPT
         -:  402:      {
-        8:  403:	const difference_type __d = difference_type(__n1 - __n2);
+       10:  403:	const difference_type __d = difference_type(__n1 - __n2);
         -:  404:
-        8:  405:	if (__d > __gnu_cxx::__numeric_traits<int>::__max)
+       10:  405:	if (__d > __gnu_cxx::__numeric_traits<int>::__max)
     #####:  406:	  return __gnu_cxx::__numeric_traits<int>::__max;
-        8:  407:	else if (__d < __gnu_cxx::__numeric_traits<int>::__min)
+       10:  407:	else if (__d < __gnu_cxx::__numeric_traits<int>::__min)
     #####:  408:	  return __gnu_cxx::__numeric_traits<int>::__min;
         -:  409:	else
-        8:  410:	  return int(__d);
+       10:  410:	  return int(__d);
         -:  411:      }
         -:  412:
         -:  413:      void
@@ -481,10 +481,10 @@ _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_:
         -:  445:       *  @brief  Construct string with copy of value of @a __str.
         -:  446:       *  @param  __str  Source string.
         -:  447:       */
-        3:  448:      basic_string(const basic_string& __str)
-        3:  449:      : _M_dataplus(_M_local_data(),
-        3:  450:		    _Alloc_traits::_S_select_on_copy(__str._M_get_allocator()))
-        3:  451:      { _M_construct(__str._M_data(), __str._M_data() + __str.length()); }
+       10:  448:      basic_string(const basic_string& __str)
+       10:  449:      : _M_dataplus(_M_local_data(),
+       10:  450:		    _Alloc_traits::_S_select_on_copy(__str._M_get_allocator()))
+       10:  451:      { _M_construct(__str._M_data(), __str._M_data() + __str.length()); }
         -:  452:
         -:  453:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
         -:  454:      // 2583. no way to supply an allocator for basic_string(str, pos)
@@ -558,9 +558,9 @@ _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_:
         -:  522:      // 3076. basic_string CTAD ambiguity
         -:  523:      template<typename = _RequireAllocator<_Alloc>>
         -:  524:#endif
-        3:  525:      basic_string(const _CharT* __s, const _Alloc& __a = _Alloc())
-        3:  526:      : _M_dataplus(_M_local_data(), __a)
-       3*:  527:      { _M_construct(__s, __s ? __s + traits_type::length(__s) : __s+npos); }
+       10:  525:      basic_string(const _CharT* __s, const _Alloc& __a = _Alloc())
+       10:  526:      : _M_dataplus(_M_local_data(), __a)
+      10*:  527:      { _M_construct(__s, __s ? __s + traits_type::length(__s) : __s+npos); }
         -:  528:
         -:  529:      /**
         -:  530:       *  @brief  Construct string as multiple characters.
@@ -690,8 +690,8 @@ _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_:
         -:  654:      /**
         -:  655:       *  @brief  Destroy the string instance.
         -:  656:       */
-       15:  657:      ~basic_string()
-       15:  658:      { _M_dispose(); }
+       29:  657:      ~basic_string()
+       29:  658:      { _M_dispose(); }
         -:  659:
         -:  660:      /**
         -:  661:       *  @brief  Assign the value of @a str to this string.
@@ -939,19 +939,19 @@ _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_:
         -:  903:      ///  Returns the number of characters in the string, not including any
         -:  904:      ///  null-termination.
         -:  905:      size_type
-       72:  906:      size() const _GLIBCXX_NOEXCEPT
-       72:  907:      { return _M_string_length; }
+      132:  906:      size() const _GLIBCXX_NOEXCEPT
+      132:  907:      { return _M_string_length; }
         -:  908:
         -:  909:      ///  Returns the number of characters in the string, not including any
         -:  910:      ///  null-termination.
         -:  911:      size_type
-       63:  912:      length() const _GLIBCXX_NOEXCEPT
-       63:  913:      { return _M_string_length; }
+       84:  912:      length() const _GLIBCXX_NOEXCEPT
+       84:  913:      { return _M_string_length; }
         -:  914:
         -:  915:      ///  Returns the size() of the largest possible %string.
         -:  916:      size_type
-      181:  917:      max_size() const _GLIBCXX_NOEXCEPT
-      181:  918:      { return (_Alloc_traits::max_size(_M_get_allocator()) - 1) / 2; }
+      282:  917:      max_size() const _GLIBCXX_NOEXCEPT
+      282:  918:      { return (_Alloc_traits::max_size(_M_get_allocator()) - 1) / 2; }
         -:  919:
         -:  920:      /**
         -:  921:       *  @brief  Resizes the %string to the specified number of characters.
@@ -995,10 +995,10 @@ _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_:
         -:  959:       *  before needing to allocate more memory.
         -:  960:       */
         -:  961:      size_type
-       58:  962:      capacity() const _GLIBCXX_NOEXCEPT
+       89:  962:      capacity() const _GLIBCXX_NOEXCEPT
         -:  963:      {
-       58:  964:	return _M_is_local() ? size_type(_S_local_capacity)
-       58:  965:	                     : _M_allocated_capacity;
+       89:  964:	return _M_is_local() ? size_type(_S_local_capacity)
+       89:  965:	                     : _M_allocated_capacity;
         -:  966:      }
         -:  967:
         -:  968:      /**
@@ -1034,8 +1034,8 @@ _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_:
         -:  998:       *  Erases the string, making it empty.
         -:  999:       */
         -: 1000:      void
-        -: 1001:      clear() _GLIBCXX_NOEXCEPT
-        -: 1002:      { _M_set_length(0); }
+        1: 1001:      clear() _GLIBCXX_NOEXCEPT
+        1: 1002:      { _M_set_length(0); }
         -: 1003:
         -: 1004:      /**
         -: 1005:       *  Returns true if the %string is empty.  Equivalent to 
@@ -1188,8 +1188,8 @@ _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_:
         -: 1152:       *  @return  Reference to this string.
         -: 1153:       */
         -: 1154:      basic_string&
-        8: 1155:      operator+=(const _CharT* __s)
-        8: 1156:      { return this->append(__s); }
+       18: 1155:      operator+=(const _CharT* __s)
+       18: 1156:      { return this->append(__s); }
         -: 1157:
         -: 1158:      /**
         -: 1159:       *  @brief  Append a character.
@@ -1274,12 +1274,12 @@ _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_:
         -: 1238:       *  @return  Reference to this string.
         -: 1239:       */
         -: 1240:      basic_string&
-        8: 1241:      append(const _CharT* __s)
+       18: 1241:      append(const _CharT* __s)
         -: 1242:      {
         -: 1243:	__glibcxx_requires_string(__s);
-        8: 1244:	const size_type __n = traits_type::length(__s);
-        8: 1245:	_M_check_length(size_type(0), __n, "basic_string::append");
-        8: 1246:	return _M_append(__s, __n);
+       18: 1244:	const size_type __n = traits_type::length(__s);
+       18: 1245:	_M_check_length(size_type(0), __n, "basic_string::append");
+       18: 1246:	return _M_append(__s, __n);
         -: 1247:      }
         -: 1248:
         -: 1249:      /**
@@ -6267,9 +6267,9 @@ _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_:
         -: 6231:   */
         -: 6232:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 6233:    inline bool
-        4: 6234:    operator==(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+        6: 6234:    operator==(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
         -: 6235:	       const _CharT* __rhs)
-        4: 6236:    { return __lhs.compare(__rhs) == 0; }
+        6: 6236:    { return __lhs.compare(__rhs) == 0; }
         -: 6237:
         -: 6238:#if __cpp_lib_three_way_comparison
         -: 6239:  /**

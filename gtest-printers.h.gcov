@@ -381,6 +381,16 @@ _ZN16testing_internal26DefaultPrintNonContainerToIlEEvRKT_PSo:
     #####:  314:    return ::testing::PrintToString(value);
         -:  315:  }
 ------------------
+_ZN7testing8internal19FormatForComparisonINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEA48_cE6FormatERKS7_:
+    #####:  313:  static ::std::string Format(const ToPrint& value) {
+    #####:  314:    return ::testing::PrintToString(value);
+        -:  315:  }
+------------------
+_ZN7testing8internal19FormatForComparisonINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEA28_cE6FormatERKS7_:
+    #####:  313:  static ::std::string Format(const ToPrint& value) {
+    #####:  314:    return ::testing::PrintToString(value);
+        -:  315:  }
+------------------
 _ZN7testing8internal19FormatForComparisonIiiE6FormatB5cxx11ERKi:
     #####:  313:  static ::std::string Format(const ToPrint& value) {
     #####:  314:    return ::testing::PrintToString(value);
@@ -411,12 +421,27 @@ _ZN7testing8internal19FormatForComparisonINSt7__cxx1112basic_stringIcSt11char_tr
     #####:  314:    return ::testing::PrintToString(value);
         -:  315:  }
 ------------------
+_ZN7testing8internal19FormatForComparisonIP1AS3_E6FormatB5cxx11ERKS3_:
+    #####:  313:  static ::std::string Format(const ToPrint& value) {
+    #####:  314:    return ::testing::PrintToString(value);
+        -:  315:  }
+------------------
         -:  316:};
         -:  317:
         -:  318:// Array.
         -:  319:template <typename ToPrint, size_t N, typename OtherOperand>
         -:  320:class FormatForComparison<ToPrint[N], OtherOperand> {
         -:  321: public:
+    #####:  322:  static ::std::string Format(const ToPrint* value) {
+    #####:  323:    return FormatForComparison<const ToPrint*, OtherOperand>::Format(value);
+        -:  324:  }
+------------------
+_ZN7testing8internal19FormatForComparisonIA48_cNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE6FormatEPKc:
+    #####:  322:  static ::std::string Format(const ToPrint* value) {
+    #####:  323:    return FormatForComparison<const ToPrint*, OtherOperand>::Format(value);
+        -:  324:  }
+------------------
+_ZN7testing8internal19FormatForComparisonIA28_cNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE6FormatEPKc:
     #####:  322:  static ::std::string Format(const ToPrint* value) {
     #####:  323:    return FormatForComparison<const ToPrint*, OtherOperand>::Format(value);
         -:  324:  }
@@ -498,6 +523,30 @@ _ZN7testing8internal19FormatForComparisonIA8_cNSt7__cxx1112basic_stringIcSt11cha
     #####:  379:  return FormatForComparison<T1, T2>::Format(value);
         -:  380:}
 ------------------
+_ZN7testing8internal33FormatForComparisonFailureMessageIA48_cNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEES8_RKT_RKT0_:
+    #####:  377:std::string FormatForComparisonFailureMessage(
+        -:  378:    const T1& value, const T2& /* other_operand */) {
+    #####:  379:  return FormatForComparison<T1, T2>::Format(value);
+        -:  380:}
+------------------
+_ZN7testing8internal33FormatForComparisonFailureMessageINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEA48_cEES7_RKT_RKT0_:
+    #####:  377:std::string FormatForComparisonFailureMessage(
+        -:  378:    const T1& value, const T2& /* other_operand */) {
+    #####:  379:  return FormatForComparison<T1, T2>::Format(value);
+        -:  380:}
+------------------
+_ZN7testing8internal33FormatForComparisonFailureMessageIA28_cNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEES8_RKT_RKT0_:
+    #####:  377:std::string FormatForComparisonFailureMessage(
+        -:  378:    const T1& value, const T2& /* other_operand */) {
+    #####:  379:  return FormatForComparison<T1, T2>::Format(value);
+        -:  380:}
+------------------
+_ZN7testing8internal33FormatForComparisonFailureMessageINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEA28_cEES7_RKT_RKT0_:
+    #####:  377:std::string FormatForComparisonFailureMessage(
+        -:  378:    const T1& value, const T2& /* other_operand */) {
+    #####:  379:  return FormatForComparison<T1, T2>::Format(value);
+        -:  380:}
+------------------
 _ZN7testing8internal33FormatForComparisonFailureMessageIiiEENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERKT_RKT0_:
     #####:  377:std::string FormatForComparisonFailureMessage(
         -:  378:    const T1& value, const T2& /* other_operand */) {
@@ -553,6 +602,12 @@ _ZN7testing8internal33FormatForComparisonFailureMessageIA8_cNSt7__cxx1112basic_s
         -:  380:}
 ------------------
 _ZN7testing8internal33FormatForComparisonFailureMessageINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEA8_cEES7_RKT_RKT0_:
+    #####:  377:std::string FormatForComparisonFailureMessage(
+        -:  378:    const T1& value, const T2& /* other_operand */) {
+    #####:  379:  return FormatForComparison<T1, T2>::Format(value);
+        -:  380:}
+------------------
+_ZN7testing8internal33FormatForComparisonFailureMessageIP1AS3_EENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERKT_RKT0_:
     #####:  377:std::string FormatForComparisonFailureMessage(
         -:  378:    const T1& value, const T2& /* other_operand */) {
     #####:  379:  return FormatForComparison<T1, T2>::Format(value);
@@ -616,17 +671,17 @@ _ZN7testing8internal33FormatForComparisonFailureMessageINSt7__cxx1112basic_strin
         -:  436:// implementation-defined.  Therefore they will be printed as raw
         -:  437:// bytes.)
         -:  438:template <typename T>
-        -:  439:void DefaultPrintTo(WrapPrinterType<kPrintPointer> /* dummy */,
+    #####:  439:void DefaultPrintTo(WrapPrinterType<kPrintPointer> /* dummy */,
         -:  440:                    T* p, ::std::ostream* os) {
-        -:  441:  if (p == nullptr) {
-        -:  442:    *os << "NULL";
+    #####:  441:  if (p == nullptr) {
+    #####:  442:    *os << "NULL";
         -:  443:  } else {
         -:  444:    // T is not a function type.  We just call << to print p,
         -:  445:    // relying on ADL to pick up user-defined << for their pointer
         -:  446:    // types, if any.
-        -:  447:    *os << p;
+    #####:  447:    *os << p;
         -:  448:  }
-        -:  449:}
+    #####:  449:}
         -:  450:template <typename T>
         -:  451:void DefaultPrintTo(WrapPrinterType<kPrintFunctionPointer> /* dummy */,
         -:  452:                    T* p, ::std::ostream* os) {
@@ -741,6 +796,40 @@ _ZN7testing8internal7PrintToIiEEvRKT_PSo:
     #####:  514:}
 ------------------
 _ZN7testing8internal7PrintToIlEEvRKT_PSo:
+    #####:  483:void PrintTo(const T& value, ::std::ostream* os) {
+        -:  484:  // DefaultPrintTo() is overloaded.  The type of its first argument
+        -:  485:  // determines which version will be picked.
+        -:  486:  //
+        -:  487:  // Note that we check for container types here, prior to we check
+        -:  488:  // for protocol message types in our operator<<.  The rationale is:
+        -:  489:  //
+        -:  490:  // For protocol messages, we want to give people a chance to
+        -:  491:  // override Google Mock's format by defining a PrintTo() or
+        -:  492:  // operator<<.  For STL containers, other formats can be
+        -:  493:  // incompatible with Google Mock's format for the container
+        -:  494:  // elements; therefore we check for container types here to ensure
+        -:  495:  // that our format is used.
+        -:  496:  //
+        -:  497:  // Note that MSVC and clang-cl do allow an implicit conversion from
+        -:  498:  // pointer-to-function to pointer-to-object, but clang-cl warns on it.
+        -:  499:  // So don't use ImplicitlyConvertible if it can be helped since it will
+        -:  500:  // cause this warning, and use a separate overload of DefaultPrintTo for
+        -:  501:  // function pointers so that the `*os << p` in the object pointer overload
+        -:  502:  // doesn't cause that warning either.
+    #####:  503:  DefaultPrintTo(
+        -:  504:      WrapPrinterType <
+        -:  505:                  (sizeof(IsContainerTest<T>(0)) == sizeof(IsContainer)) &&
+        -:  506:              !IsRecursiveContainer<T>::value
+        -:  507:          ? kPrintContainer
+        -:  508:          : !std::is_pointer<T>::value
+        -:  509:                ? kPrintOther
+        -:  510:                : std::is_function<typename std::remove_pointer<T>::type>::value
+        -:  511:                      ? kPrintFunctionPointer
+        -:  512:                      : kPrintPointer > (),
+        -:  513:      value, os);
+    #####:  514:}
+------------------
+_ZN7testing8internal7PrintToIP1AEEvRKT_PSo:
     #####:  483:void PrintTo(const T& value, ::std::ostream* os) {
         -:  484:  // DefaultPrintTo() is overloaded.  The type of its first argument
         -:  485:  // determines which version will be picked.
@@ -967,6 +1056,19 @@ _ZN7testing8internal16UniversalPrinterIlE5PrintERKlPSo:
     #####:  679:    PrintTo(value, os);
     #####:  680:  }
 ------------------
+_ZN7testing8internal16UniversalPrinterIP1AE5PrintERKS3_PSo:
+    #####:  670:  static void Print(const T& value, ::std::ostream* os) {
+        -:  671:    // By default, ::testing::internal::PrintTo() is used for printing
+        -:  672:    // the value.
+        -:  673:    //
+        -:  674:    // Thanks to Koenig look-up, if T is a class and has its own
+        -:  675:    // PrintTo() function defined in its namespace, that function will
+        -:  676:    // be visible here.  Since it is more specific than the generic ones
+        -:  677:    // in ::testing::internal, it will be picked by the compiler in the
+        -:  678:    // following statement - exactly what we want.
+    #####:  679:    PrintTo(value, os);
+    #####:  680:  }
+------------------
 _ZN7testing8internal16UniversalPrinterINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE5PrintERKS7_PSo:
     #####:  670:  static void Print(const T& value, ::std::ostream* os) {
         -:  671:    // By default, ::testing::internal::PrintTo() is used for printing
@@ -1114,6 +1216,11 @@ _ZN7testing8internal21UniversalTersePrinterINSt7__cxx1112basic_stringIcSt11char_
     #####:  797:    UniversalPrint(value, os);
     #####:  798:  }
 ------------------
+_ZN7testing8internal21UniversalTersePrinterIP1AE5PrintERKS3_PSo:
+    #####:  796:  static void Print(const T& value, ::std::ostream* os) {
+    #####:  797:    UniversalPrint(value, os);
+    #####:  798:  }
+------------------
         -:  799:};
         -:  800:template <typename T>
         -:  801:class UniversalTersePrinter<T&> {
@@ -1203,6 +1310,14 @@ _ZN7testing8internal14UniversalPrintIlEEvRKT_PSo:
     #####:  869:  UniversalPrinter<T1>::Print(value, os);
     #####:  870:}
 ------------------
+_ZN7testing8internal14UniversalPrintIP1AEEvRKT_PSo:
+    #####:  865:void UniversalPrint(const T& value, ::std::ostream* os) {
+        -:  866:  // A workarond for the bug in VC++ 7.1 that prevents us from instantiating
+        -:  867:  // UniversalPrinter with T directly.
+        -:  868:  typedef T T1;
+    #####:  869:  UniversalPrinter<T1>::Print(value, os);
+    #####:  870:}
+------------------
 _ZN7testing8internal14UniversalPrintINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEEvRKT_PSo:
     #####:  865:void UniversalPrint(const T& value, ::std::ostream* os) {
         -:  866:  // A workarond for the bug in VC++ 7.1 that prevents us from instantiating
@@ -1276,6 +1391,13 @@ _ZN7testing13PrintToStringIlEENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcE
     #####:  919:}
 ------------------
 _ZN7testing13PrintToStringINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEES6_RKT_:
+    #####:  915:::std::string PrintToString(const T& value) {
+    #####:  916:  ::std::stringstream ss;
+    #####:  917:  internal::UniversalTersePrinter<T>::Print(value, &ss);
+    #####:  918:  return ss.str();
+    #####:  919:}
+------------------
+_ZN7testing13PrintToStringIP1AEENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERKT_:
     #####:  915:::std::string PrintToString(const T& value) {
     #####:  916:  ::std::stringstream ss;
     #####:  917:  internal::UniversalTersePrinter<T>::Print(value, &ss);

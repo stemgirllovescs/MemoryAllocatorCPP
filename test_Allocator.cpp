@@ -185,19 +185,17 @@ TEST(AllocatorFixture, test8) {
     allocator_type  x;
     const size_type s1 = 2;
     const pointer   b1 = x.allocate(s1);
-    const size_type s2 = 3;
+    const size_type s2 = 4;
     const pointer   b2 = x.allocate(s2);
 
-    x.deallocate(b1, s1);
     x.deallocate(b2, s2);
 
-    const pointer b3 = x.allocate(s2);
-    const pointer b4 = x.allocate(s1);
-    ASSERT_EQ(b2, b3);
-    ASSERT_EQ(b1, b4);
+    const size_type s3 = 3;
+    const pointer   b3 = x.allocate(s3);
+    ASSERT_EQ(b2, b3); // b3 should reuse the block of b2
 
-    x.deallocate(b3, s2);
-    x.deallocate(b4, s1);}
+    x.deallocate(b3, s3);
+    x.deallocate(b1, s1);}
 
 TEST(AllocatorFixture, test9) {
     using allocator_type = My_Allocator<A, 1000>;

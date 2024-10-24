@@ -65,15 +65,15 @@
         -:   61:            // operator ==
         -:   62:            // -----------
         -:   63:
-        1:   64:            friend bool operator == (const iterator& lhs, const iterator& rhs) { // fix!
-       1*:   65:                return (&lhs._r == &rhs._r) && (lhs._i == rhs._i); }
+       31:   64:            friend bool operator == (const iterator& lhs, const iterator& rhs) { // fix!
+      31*:   65:                return (&lhs._r == &rhs._r) && (lhs._i == rhs._i); }
         -:   66:
         -:   67:            // -----------
         -:   68:            // operator !=
         -:   69:            // -----------
         -:   70:
-        1:   71:            friend bool operator != (const iterator& lhs, const iterator& rhs) { // this is correct
-        1:   72:                return !(lhs == rhs);}
+       31:   71:            friend bool operator != (const iterator& lhs, const iterator& rhs) { // this is correct
+       31:   72:                return !(lhs == rhs);}
         -:   73:
         -:   74:            public:
         -:   75:                // ----
@@ -88,26 +88,26 @@
         -:   84:                // constructor
         -:   85:                // -----------
         -:   86:
-        2:   87:                iterator (My_Allocator& r, size_type i) :
-        2:   88:                        _r (r),
-        2:   89:                        _i (i)
-        2:   90:                    {}
+       52:   87:                iterator (My_Allocator& r, size_type i) :
+       52:   88:                        _r (r),
+       52:   89:                        _i (i)
+       52:   90:                    {}
         -:   91:
         -:   92:                // ----------
         -:   93:                // operator *
         -:   94:                // ----------
         -:   95:
-        1:   96:                int& operator * () const { // fix!
-        1:   97:                    return _r[_i];}
+       31:   96:                int& operator * () const { // fix!
+       31:   97:                    return _r[_i];}
         -:   98:
         -:   99:                // -----------
         -:  100:                // operator ++
         -:  101:                // -----------
         -:  102:
-    #####:  103:                iterator& operator ++ () { // fix!
-    #####:  104:                    int block_size = std::abs(_r[_i]);
-    #####:  105:                    _i += block_size + 8;
-    #####:  106:                    return *this;}
+       10:  103:                iterator& operator ++ () { // fix!
+       10:  104:                    int block_size = std::abs(_r[_i]);
+       10:  105:                    _i += block_size + 8;
+       10:  106:                    return *this;}
         -:  107:
         -:  108:                // -----------
         -:  109:                // operator ++
@@ -236,21 +236,21 @@
         -:  232:         * O(n) in time
         -:  233:         * Check if the allocator's sentinels are consistent
         -:  234:         */
-        9:  235:        bool valid () const {
-        9:  236:            int i = 0;
-       23:  237:            while (i < static_cast<int>(N)){
-       14:  238:                int block_size = (*this)[i];
-       14:  239:                int block_end = i + 4 + std::abs(block_size);
-       14:  240:                if (block_end + 4 > static_cast<int>(N)){
+       64:  235:        bool valid () const {
+       64:  236:            int i = 0;
+      190:  237:            while (i < static_cast<int>(N)){
+      126:  238:                int block_size = (*this)[i];
+      126:  239:                int block_end = i + 4 + std::abs(block_size);
+      126:  240:                if (block_end + 4 > static_cast<int>(N)){
     #####:  241:                    return false;
         -:  242:                }
-       14:  243:                int end_sentinel = (*this)[block_end];
-       14:  244:                if (block_size != end_sentinel){
+      126:  243:                int end_sentinel = (*this)[block_end];
+      126:  244:                if (block_size != end_sentinel){
     #####:  245:                    return false;
         -:  246:                }
-       14:  247:                i = block_end + 4;
+      126:  247:                i = block_end + 4;
         -:  248:            }
-        9:  249:            return true;
+       64:  249:            return true;
         -:  250:        }
         -:  251:
         -:  252:    public:
@@ -263,12 +263,12 @@
         -:  259:         * O(1) in time
         -:  260:         * throw a std::bad_alloc exception, if N is less than sizeof(T) + (2 * sizeof(int))
         -:  261:         */
-        3:  262:        My_Allocator () {
+       10:  262:        My_Allocator () {
         -:  263:            if (N < (8 + (2 * sizeof(int))))
         -:  264:                throw std::bad_alloc();
-        3:  265:            (*this)[0]   = N-8;
-        3:  266:            (*this)[N-4] = N-8;
-       3*:  267:            assert(valid());}
+       10:  265:            (*this)[0]   = N-8;
+       10:  266:            (*this)[N-4] = N-8;
+      10*:  267:            assert(valid());}
         -:  268:
         -:  269:        My_Allocator             (const My_Allocator&) = default;
         -:  270:        ~My_Allocator            ()                    = default;
@@ -286,30 +286,30 @@
         -:  282:         * choose the first block that fits
         -:  283:         * throw a std::bad_alloc exception, if there isn't an acceptable free block
         -:  284:         */
-        1:  285:pointer allocate (size_type s) {
-        1:  286:    int size_in_bytes = s * 8; // Object size is 8 bytes
+       21:  285:pointer allocate (size_type s) {
+       21:  286:    int size_in_bytes = s * 8; // Object size is 8 bytes
         -:  287:
-       1*:  288:    for (iterator it = begin(); it != end(); ++it) {
-        1:  289:        int& block_size = *it;
-        1:  290:        if (block_size > 0 && block_size >= size_in_bytes) {
-        1:  291:            int original_size = block_size;
-        1:  292:            int remaining = original_size - size_in_bytes - 8; // Remaining data size after allocating and adding end sentinel
+       31:  288:    for (iterator it = begin(); it != end(); ++it) {
+       31:  289:        int& block_size = *it;
+       31:  290:        if (block_size > 0 && block_size >= size_in_bytes) {
+       21:  291:            int original_size = block_size;
+       21:  292:            int remaining = original_size - size_in_bytes - 8; // Remaining data size after allocating and adding end sentinel
         -:  293:
-        1:  294:            if (remaining >= static_cast<int>(8)){
+       21:  294:            if (remaining >= static_cast<int>(8)){
         -:  295:                // Split the block
-        1:  296:                block_size = -size_in_bytes;
-        1:  297:                (*this)[it._i + 4 + size_in_bytes] = -size_in_bytes; // End sentinel for allocated block
+       20:  296:                block_size = -size_in_bytes;
+       20:  297:                (*this)[it._i + 4 + size_in_bytes] = -size_in_bytes; // End sentinel for allocated block
         -:  298:                // Create new free block
-        1:  299:                int new_block_index = it._i + 8 + size_in_bytes;
-        1:  300:                (*this)[new_block_index] = remaining;
-        1:  301:                (*this)[new_block_index + 4 + remaining] = remaining;
+       20:  299:                int new_block_index = it._i + 8 + size_in_bytes;
+       20:  300:                (*this)[new_block_index] = remaining;
+       20:  301:                (*this)[new_block_index + 4 + remaining] = remaining;
         -:  302:            } else {
         -:  303:                // Do not split, allocate entire block
-    #####:  304:                block_size = -original_size;
-    #####:  305:                (*this)[it._i + 4 + original_size] = -original_size;
+        1:  304:                block_size = -original_size;
+        1:  305:                (*this)[it._i + 4 + original_size] = -original_size;
         -:  306:            }
-       1*:  307:            assert(valid());
-        1:  308:            return reinterpret_cast<pointer>(&a[it._i +4]);
+      21*:  307:            assert(valid());
+       21:  308:            return reinterpret_cast<pointer>(&a[it._i +4]);
         -:  309:        }
         -:  310:    }
     #####:  311:    throw std::bad_alloc();
@@ -324,9 +324,9 @@
         -:  320:         * O(1) in space
         -:  321:         * O(1) in time
         -:  322:         */
-        2:  323:        void construct (pointer p, const_reference v) { // this is correct and exempt
-        2:  324:            new (p) T(v);                               // from the prohibition of new
-       2*:  325:            assert(valid());}
+        6:  323:        void construct (pointer p, const_reference v) { // this is correct and exempt
+        6:  324:            new (p) T(v);                               // from the prohibition of new
+       6*:  325:            assert(valid());}
         -:  326:        // ----------
         -:  327:        // deallocate
         -:  328:        // ----------
@@ -356,52 +356,52 @@
         -:  352: * After deallocation adjacent free blocks must be coalesced.
         -:  353: * Throw an invalid_argument exception, if p is invalid.
         -:  354: */
-        1:  355:void deallocate(pointer p, size_type) {
-        1:  356:    int index = reinterpret_cast<char*>(p) - a - 4;
-        1:  357:    if (index < 0 || index >= static_cast<int>(N)) {
+       21:  355:void deallocate(pointer p, size_type) {
+       21:  356:    int index = reinterpret_cast<char*>(p) - a - 4;
+       21:  357:    if (index < 0 || index >= static_cast<int>(N)) {
     #####:  358:        throw std::invalid_argument("Invalid pointer");
         -:  359:    }
         -:  360:
-        1:  361:    int& block_size = (*this)[index];
-        1:  362:    if (block_size >= 0) {
+       21:  361:    int& block_size = (*this)[index];
+       21:  362:    if (block_size >= 0) {
     #####:  363:        throw std::invalid_argument("Block is already free");
         -:  364:    }
         -:  365:
         -:  366:    // Mark block as free
-        1:  367:    int size = -block_size;
-        1:  368:    block_size = size;
-        1:  369:    (*this)[index + 4 + size] = size;
+       21:  367:    int size = -block_size;
+       21:  368:    block_size = size;
+       21:  369:    (*this)[index + 4 + size] = size;
         -:  370:
         -:  371:    // Coalesce with the next block if it is free
-        1:  372:    int next_index = index + size + 8;
-        1:  373:    if (next_index < static_cast<int>(N)) {
-        1:  374:        int& next_block_size = (*this)[next_index];
-        1:  375:        if (next_block_size > 0) {
+       21:  372:    int next_index = index + size + 8;
+       21:  373:    if (next_index < static_cast<int>(N)) {
+       21:  374:        int& next_block_size = (*this)[next_index];
+       21:  375:        if (next_block_size > 0) {
         -:  376:            // Update size to include the next free block and the header/footer
-        1:  377:            size += next_block_size + 8;
-        1:  378:            (*this)[index] = size;  // Update start sentinel
-        1:  379:            (*this)[index + 4 + size] = size;  // Update end sentinel
-        1:  380:            block_size = size; // Update block_size after coalescing
+       14:  377:            size += next_block_size + 8;
+       14:  378:            (*this)[index] = size;  // Update start sentinel
+       14:  379:            (*this)[index + 4 + size] = size;  // Update end sentinel
+       14:  380:            block_size = size; // Update block_size after coalescing
         -:  381:        }
         -:  382:    }
         -:  383:
         -:  384:    // Coalesce with the previous block if it is free
-        1:  385:    if (index > 0) {
-    #####:  386:        int prev_end_index = index - 4;
-    #####:  387:        int prev_size = (*this)[prev_end_index];
-    #####:  388:        if (prev_size > 0) {
-    #####:  389:            int prev_index = index - prev_size - 8;
+       21:  385:    if (index > 0) {
+       10:  386:        int prev_end_index = index - 4;
+       10:  387:        int prev_size = (*this)[prev_end_index];
+       10:  388:        if (prev_size > 0) {
+        6:  389:            int prev_index = index - prev_size - 8;
         -:  390:            // Update size to include the previous free block and the header/footer
-    #####:  391:            size += prev_size + 8;
-    #####:  392:            (*this)[prev_index] = size;  // Update start sentinel
-    #####:  393:            (*this)[prev_index + 4 + size] = size;  // Update end sentinel
-    #####:  394:            index = prev_index;      // Update index to new start
-    #####:  395:            block_size = size;       // Update block_size to new size
+        6:  391:            size += prev_size + 8;
+        6:  392:            (*this)[prev_index] = size;  // Update start sentinel
+        6:  393:            (*this)[prev_index + 4 + size] = size;  // Update end sentinel
+        6:  394:            index = prev_index;      // Update index to new start
+        6:  395:            block_size = size;       // Update block_size to new size
         -:  396:        }
         -:  397:    }
         -:  398:
-       1*:  399:    assert(valid());
-        1:  400:}
+      21*:  399:    assert(valid());
+       21:  400:}
         -:  401:
         -:  402:
         -:  403:
@@ -413,9 +413,9 @@
         -:  409:         * O(1) in space
         -:  410:         * O(1) in time
         -:  411:         */
-        2:  412:        void destroy (pointer p) { // this is correct
-        2:  413:            p->~T();
-       2*:  414:            assert(valid());}
+        6:  412:        void destroy (pointer p) { // this is correct
+        6:  413:            p->~T();
+       6*:  414:            assert(valid());}
         -:  415:
         -:  416:        // -----------
         -:  417:        // operator []
@@ -425,22 +425,22 @@
         -:  421:         * O(1) in space
         -:  422:         * O(1) in time
         -:  423:         */
-       17:  424:        int& operator [] (int i) { // this is correct
-       17:  425:            return *reinterpret_cast<int*>(&a[i]);}
+      237:  424:        int& operator [] (int i) { // this is correct
+      237:  425:            return *reinterpret_cast<int*>(&a[i]);}
         -:  426:
         -:  427:        /**
         -:  428:         * O(1) in space
         -:  429:         * O(1) in time
         -:  430:         */
-       30:  431:        const int& operator [] (int i) const { // this is correct
-       30:  432:            return *reinterpret_cast<const int*>(&a[i]);}
+      254:  431:        const int& operator [] (int i) const { // this is correct
+      254:  432:            return *reinterpret_cast<const int*>(&a[i]);}
         -:  433:
         -:  434:        // -----
         -:  435:        // begin
         -:  436:        // -----
         -:  437:
-        1:  438:        iterator begin () { // this is correct
-        1:  439:            return iterator(*this, 0);}
+       21:  438:        iterator begin () { // this is correct
+       21:  439:            return iterator(*this, 0);}
         -:  440:
         -:  441:        const_iterator begin () const { // this is correct
         -:  442:            return const_iterator(*this, 0);}
@@ -449,8 +449,8 @@
         -:  445:        // end
         -:  446:        // ---
         -:  447:
-        1:  448:        iterator end () { // this is correct
-        1:  449:            return iterator(*this, N);}
+       31:  448:        iterator end () { // this is correct
+       31:  449:            return iterator(*this, N);}
         -:  450:
         -:  451:        const_iterator end () const { // this is correct
         -:  452:            return const_iterator(*this, N);}};

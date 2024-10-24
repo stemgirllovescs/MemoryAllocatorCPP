@@ -50,16 +50,16 @@
         -:   46:   */
         -:   47:  template<typename _Tp>
         -:   48:    inline _GLIBCXX_CONSTEXPR _Tp*
-      110:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
-      110:   50:    { return __builtin_addressof(__r); }
+      176:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
+      176:   50:    { return __builtin_addressof(__r); }
 ------------------
 _ZSt11__addressofIKcEPT_RS1_:
-      103:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
-      103:   50:    { return __builtin_addressof(__r); }
+      155:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
+      155:   50:    { return __builtin_addressof(__r); }
 ------------------
 _ZSt11__addressofIcEPT_RS0_:
-        7:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
-        7:   50:    { return __builtin_addressof(__r); }
+       21:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
+       21:   50:    { return __builtin_addressof(__r); }
 ------------------
         -:   51:
         -:   52:#if __cplusplus >= 201103L
@@ -114,8 +114,8 @@ _ZSt11__addressofIcEPT_RS0_:
         -:  101:  template<typename _Tp>
         -:  102:    _GLIBCXX_NODISCARD
         -:  103:    constexpr typename std::remove_reference<_Tp>::type&&
-       4*:  104:    move(_Tp&& __t) noexcept
-       4*:  105:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+      11*:  104:    move(_Tp&& __t) noexcept
+      11*:  105:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
 ------------------
 _ZSt4moveIRPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEONSt16remove_referenceIT_E4typeEOS9_:
     #####:  104:    move(_Tp&& __t) noexcept
@@ -126,8 +126,8 @@ _ZSt4moveIRPNSt7__cxx1118basic_stringstreamIcSt11char_traitsIcESaIcEEEEONSt16rem
     #####:  105:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
 ------------------
 _ZSt4moveIRSaIcEEONSt16remove_referenceIT_E4typeEOS3_:
-        4:  104:    move(_Tp&& __t) noexcept
-        4:  105:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+       11:  104:    move(_Tp&& __t) noexcept
+       11:  105:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
 ------------------
         -:  106:
         -:  107:
@@ -168,16 +168,16 @@ _ZSt4moveIRSaIcEEONSt16remove_referenceIT_E4typeEOS3_:
         -:  142:  template<typename _Tp>
         -:  143:    _GLIBCXX_NODISCARD
         -:  144:    inline _GLIBCXX17_CONSTEXPR _Tp*
-      110:  145:    addressof(_Tp& __r) noexcept
-      110:  146:    { return std::__addressof(__r); }
+      176:  145:    addressof(_Tp& __r) noexcept
+      176:  146:    { return std::__addressof(__r); }
 ------------------
 _ZSt9addressofIKcEPT_RS1_:
-      103:  145:    addressof(_Tp& __r) noexcept
-      103:  146:    { return std::__addressof(__r); }
+      155:  145:    addressof(_Tp& __r) noexcept
+      155:  146:    { return std::__addressof(__r); }
 ------------------
 _ZSt9addressofIcEPT_RS0_:
-        7:  145:    addressof(_Tp& __r) noexcept
-        7:  146:    { return std::__addressof(__r); }
+       21:  145:    addressof(_Tp& __r) noexcept
+       21:  146:    { return std::__addressof(__r); }
 ------------------
         -:  147:
         -:  148:  // _GLIBCXX_RESOLVE_LIB_DEFECTS

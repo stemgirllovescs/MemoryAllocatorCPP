@@ -171,10 +171,10 @@
         -:  167:      allocate(size_t __n)
         -:  168:      {
         -:  169:#ifdef __cpp_lib_is_constant_evaluated
-      132:  170:	if (std::is_constant_evaluated())
+      216:  170:	if (std::is_constant_evaluated())
     #####:  171:	  return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
         -:  172:#endif
-      132:  173:	return __allocator_base<_Tp>::allocate(__n, 0);
+      216:  173:	return __allocator_base<_Tp>::allocate(__n, 0);
         -:  174:      }
         -:  175:
         -:  176:      [[__gnu__::__always_inline__]]
@@ -182,13 +182,13 @@
         -:  178:      deallocate(_Tp* __p, size_t __n)
         -:  179:      {
         -:  180:#ifdef __cpp_lib_is_constant_evaluated
-       11:  181:	if (std::is_constant_evaluated())
+       32:  181:	if (std::is_constant_evaluated())
         -:  182:	  {
     #####:  183:	    ::operator delete(__p);
     #####:  184:	    return;
         -:  185:	  }
         -:  186:#endif
-       11:  187:	  __allocator_base<_Tp>::deallocate(__p, __n);
+       32:  187:	  __allocator_base<_Tp>::deallocate(__p, __n);
         -:  188:      }
         -:  189:#endif // C++20
         -:  190:

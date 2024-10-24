@@ -147,16 +147,16 @@
         -:  143:       *  @return @c addressof(__r)
         -:  144:      */
         -:  145:      static _GLIBCXX20_CONSTEXPR pointer
-      110:  146:      pointer_to(__make_not_void<element_type>& __r) noexcept
-      110:  147:      { return std::addressof(__r); }
+      176:  146:      pointer_to(__make_not_void<element_type>& __r) noexcept
+      176:  147:      { return std::addressof(__r); }
 ------------------
 _ZNSt14pointer_traitsIPKcE10pointer_toERS0_:
-      103:  146:      pointer_to(__make_not_void<element_type>& __r) noexcept
-      103:  147:      { return std::addressof(__r); }
+      155:  146:      pointer_to(__make_not_void<element_type>& __r) noexcept
+      155:  147:      { return std::addressof(__r); }
 ------------------
 _ZNSt14pointer_traitsIPcE10pointer_toERc:
-        7:  146:      pointer_to(__make_not_void<element_type>& __r) noexcept
-        7:  147:      { return std::addressof(__r); }
+       21:  146:      pointer_to(__make_not_void<element_type>& __r) noexcept
+       21:  147:      { return std::addressof(__r); }
 ------------------
         -:  148:    };
         -:  149:

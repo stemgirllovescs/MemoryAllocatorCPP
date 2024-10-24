@@ -3316,8 +3316,8 @@
         -: 3312:#define __cpp_lib_is_constant_evaluated 201811L
         -: 3313:
         -: 3314:  constexpr inline bool
-      215: 3315:  is_constant_evaluated() noexcept
-      215: 3316:  { return __builtin_is_constant_evaluated(); }
+      386: 3315:  is_constant_evaluated() noexcept
+      386: 3316:  { return __builtin_is_constant_evaluated(); }
         -: 3317:#endif
         -: 3318:
         -: 3319:  template<typename _From, typename _To>
